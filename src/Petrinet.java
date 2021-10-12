@@ -3,7 +3,7 @@ import java.util.LinkedList;
 public class Petrinet implements IPetrinet{
 	
 	private LinkedList <Place> places;
-	private LinkedList <Arc> arcs;
+	private LinkedList <IArc> arcs;
 	private LinkedList <Transition> transitions;
 	
 
@@ -18,21 +18,29 @@ public class Petrinet implements IPetrinet{
 	public void createArc(Place place, String type, int nb_jetons) throws TypeException {
 		if (type=="videur") {
 			IArc arc = new Arc_videur(place);
+			arcs.add(arc);
+
 		}
 		if (type=="classique") {
 			IArc arc = new Arc_classique(place , nb_jetons);
+			arcs.add(arc);
+
 		}
 		if (type=="zéro"  | type=="zero") {
 			IArc arc = new Arc_zero(place);
+			arcs.add(arc);
+
 		}
 		else {
 			throw new TypeException();
 		}
+		
 	}
 	
 	
 	public void createTransitition(LinkedList arc_e, LinkedList arc_s) {
 		Transition t = new Transition(arc_e, arc_s);
+		transitions.add(t);
 		
 	}
 
@@ -55,15 +63,13 @@ public class Petrinet implements IPetrinet{
 	}
 
 	@Override
-	public void removeTransition() {
+	public void removeTransition(Transition transition) {
 		// TODO Auto-generated method stub
-		
+		for (IArc arc : transition.getArc_e() ) {
+			arc.removeArc();
+		}
 	}
-	@Override
-	public void createArc() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	
 	
 
