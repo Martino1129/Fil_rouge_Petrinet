@@ -10,6 +10,7 @@ public class Arc_classique extends Arc{
 	public boolean arc_valide() {
 		if (this.nb_jetons <= this.place_a.get_nb_jetons()) {
 			return true; 
+			//test 
 		}
 		return false;
 	}
