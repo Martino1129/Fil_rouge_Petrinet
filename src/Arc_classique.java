@@ -8,7 +8,6 @@ public class Arc_classique implements IArc{
 		this.nb_jetons = n;
 		
 	}
-	
 	public boolean arc_valide() {
 		if (this.nb_jetons <= this.place_a.get_nb_jetons()) {
 			return true; 
