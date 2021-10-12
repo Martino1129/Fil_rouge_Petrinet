@@ -1,12 +1,12 @@
 
-public class Arc_zero extends Arc{
-	
+public class Arc_zero implements IArc{
+	private Place place_a;
 	
 	public Arc_zero(Place p) {
-		super(p);
+		this.place_a = p;
 	}
 	
-	public boolean Arc_valide() {
+	public boolean arc_valide() {
 		if (this.place_a.get_nb_jetons()==0) {
 			return true;
 		}
