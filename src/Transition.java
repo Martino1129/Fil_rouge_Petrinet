@@ -11,7 +11,7 @@ public class Transition {
         }
         
         public boolean trigger_transition() {
-                        if (arc.arc_valide()==false) {
+                        if (!arc.arc_valide()) {
                                 return false;
                         }
                 }
