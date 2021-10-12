@@ -1,9 +1,10 @@
 
-public class Arc_classique extends Arc{
+public class Arc_classique implements IArc{
 	private int nb_jetons;
+	private Place place_a;
 	
 	public Arc_classique(Place p, int n) {
-		super(p);
+		this.place_a = p;
 		this.nb_jetons = n;
 		
 	}

@@ -1,8 +1,9 @@
 
-public class Arc_videur extends Arc{
+public class Arc_videur implements IArc{
+	private Place place_a;
 	
-	public Arc_videur(Place p) {
-		super(p);
+	public Arc_videur(Place p){
+		this.place_a= p;
 	}
 	
 	public boolean arc_valide() {
