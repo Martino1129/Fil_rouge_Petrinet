@@ -6,8 +6,8 @@ public class Arc {
 		// TODO Auto-generated constructor stub
 		this.place_a = p;
 	}
-	public void arc_valide() {
-		return;
+	public boolean arc_valide() {
+		return true;
 	}
 	public void apply_transition(boolean b) {
 		return; 

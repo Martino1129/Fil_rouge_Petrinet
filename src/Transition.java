@@ -11,10 +11,11 @@ public class Transition {
         }
         
         public boolean trigger_transition() {
-                        if (arc.arc_valide()==false) {
+        		for (Arc arc : arc_e) {
+                        if (!arc.arc_valide()) {
                                 return false;
                         }
-                }
+        		}
                 for (Arc arc : arc_e) {
                         arc.apply_transition(false);
                 }
