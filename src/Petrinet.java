@@ -21,9 +21,20 @@ public class Petrinet implements IPetrinet{
 	 * There are 3 differents types of arc, the type is defined by the string "type"
 	 */
 	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction {
+		if (sens) {
+			for (IArc arc : t.getArc_s()) {
+				if (arc.getPlace().equals(place)) {
+					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
+				}
+			}
+		}
+		else for (IArc arc : t.getArc_e()) {
+				if (arc.getPlace().equals(place)) {
+					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
+			}
+		}
 		
 		// create a new Arc and add associate it to a Transition
-		
 		if (type.equals("videur")) {
 
 			IArc arc = new Arc_videur(place);
