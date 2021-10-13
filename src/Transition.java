@@ -25,15 +25,34 @@ public class Transition {
                 
                 return true;
         }
+
         public void addArc(boolean sens, IArc a) throws ImpossibleAction{
         	// add an arc to the transition if sens is true, the arc is at the beginning of the transition 
         	if (sens) {
         		this.arc_e.add(a);
         	} else {
         		if (a.getType().equals("videur")||a.getType().equals("zero")) {
-        			throw new ImpossibleAction("ce type d'arc ne peut pas être en sortie d'une transition");
+        			throw new ImpossibleAction("ce type d'arc ne peut pas ï¿½tre en sortie d'une transition");
         		}
         		this.arc_s.add(a);
         	}
         }
+
+		  public LinkedList<IArc> getArc_e() {
+			  return arc_e;
+		  }
+
+		  public void setArc_e(LinkedList<IArc> arc_e) {
+			  this.arc_e = arc_e;
+		  }
+
+		  public LinkedList<IArc> getArc_s() {
+			  return arc_s;
+		  }
+
+		  public void setArc_s(LinkedList<IArc> arc_s) {
+			  this.arc_s = arc_s;
+		  }
+        
+
 }
