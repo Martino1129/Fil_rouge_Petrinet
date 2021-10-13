@@ -15,7 +15,11 @@ public class Petrinet implements IPetrinet{
 	}
 	
 	
-
+	/**
+	 * This method creates an Arc: 
+	 * sens True => transiton-->place, False => place --> transition
+	 * There are 3 differents types of arc, the type is defined by the string "type"
+	 */
 	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction {
 		
 		// create a new Arc and add associate it to a Transition
@@ -45,16 +49,18 @@ public class Petrinet implements IPetrinet{
 		
 	}
 	
-	
-	public void createTransitition(LinkedList arc_e, LinkedList arc_s) {
-		Transition t = new Transition(arc_e, arc_s);
+	/**
+	 * This method creates a Transition not connected with any arcs
+	 */
+	public void createTransitition() {
+		Transition t = new Transition(new LinkedList<IArc>(), new LinkedList<IArc>());
 		transitions.add(t);
 		
 	}
 
 
 	public void triggerTransition(Transition transition) {
-		// TODO Auto-generated method stub
+		transition.trigger_transition();
 		
 		
 	}
