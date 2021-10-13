@@ -24,8 +24,10 @@ public class Arc_classique implements IArc{
 		else { 
 			this.place_a.modify_nb_jetons(this.place_a.get_nb_jetons()-this.nb_jetons);
 		}
-		
-		
+	}
+	
+	public String getType() {
+		return "classique";
 	}
 
 }

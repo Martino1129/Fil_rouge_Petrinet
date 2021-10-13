@@ -19,4 +19,8 @@ public class Arc_videur implements IArc{
 		}
 		return;
 	}
+	
+	public String getType() {
+		return "videur";
+	}
 }
