@@ -16,17 +16,17 @@ public class Petrinet implements IPetrinet{
 	
 	
 	public void createArc(Place place, String type, int nb_jetons) throws TypeException {
-		if (type=="videur") {
+		if (type.equals("videur")) {
 			IArc arc = new Arc_videur(place);
 			arcs.add(arc);
 
 		}
-		if (type=="classique") {
+		if (type.equals("classique")) {
 			IArc arc = new Arc_classique(place , nb_jetons);
 			arcs.add(arc);
 
 		}
-		if (type=="zéro"  | type=="zero") {
+		if (type.equals("zéro")  | type.equals("zero")) {
 			IArc arc = new Arc_zero(place);
 			arcs.add(arc);
 
@@ -45,30 +45,54 @@ public class Petrinet implements IPetrinet{
 	}
 
 
-	public void triggerTransition() {
+	public void triggerTransition(Transition transition) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removePlace() {
-		// TODO Auto-generated method stub
+	public void removePlace(Place place) {
+		/**
+		 *  To remove a Place, we got to remove every arcs linked to it otherwise there will be unconnected
+		 * arcs in our list of arcs. 
+		 */
+		
+		for (IArc arc : arcs) {
+			if (arc.getPlace().equals(place)) {
+				arcs.remove(arc);
+			}
+		}
+		places.remove(place);
 		
 	}
 
 	@Override
-	public void removeArc() {
-		// TODO Auto-generated method stub
+	public void removeArc(IArc arc) {
+		arcs.remove(arc);
 		
 	}
 
 	@Override
 	public void removeTransition(Transition transition) {
-		// TODO Auto-generated method stub
+		/**
+		 * To remove a transition, we got to remove every arcs linked to it otherwise there will be unconnected
+		 * arcs in our list of arcs.
+		 */
+		
+		
 		for (IArc arc : transition.getArc_e() ) {
-			arc.removeArc();
+			removeArc(arc);
 		}
+		
+		for (IArc arc : transition.getArc_s() ) {
+			removeArc(arc);
+		}
+		transitions.remove(transition);
 	}
+
+
+
+
 
 	
 	

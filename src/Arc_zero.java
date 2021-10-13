@@ -17,5 +17,8 @@ public class Arc_zero implements IArc{
 		return; 
 	}
 	
+	public Place getPlace() {
+		return place_a;
+	}
 	
 }

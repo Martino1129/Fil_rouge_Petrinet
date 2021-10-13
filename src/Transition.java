@@ -25,4 +25,21 @@ public class Transition {
                 
                 return true;
         }
+
+		public LinkedList<IArc> getArc_e() {
+			return arc_e;
+		}
+
+		public void setArc_e(LinkedList<IArc> arc_e) {
+			this.arc_e = arc_e;
+		}
+
+		public LinkedList<IArc> getArc_s() {
+			return arc_s;
+		}
+
+		public void setArc_s(LinkedList<IArc> arc_s) {
+			this.arc_s = arc_s;
+		}
+        
 }
