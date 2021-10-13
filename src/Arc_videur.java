@@ -18,6 +18,7 @@ public class Arc_videur implements IArc{
 			this.place_a.modify_nb_jetons(0);
 		}
 		return;
+	}
 
 	public String getType() {
 		return "videur";
