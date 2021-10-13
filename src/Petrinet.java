@@ -15,20 +15,28 @@ public class Petrinet implements IPetrinet{
 	}
 	
 	
-	public void createArc(Place place, String type, int nb_jetons) throws TypeException {
+
+	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction {
+		
+		// create a new Arc and add associate it to a Transition
+		
 		if (type.equals("videur")) {
+
 			IArc arc = new Arc_videur(place);
 			arcs.add(arc);
+			t.addArc(sens, arc);
 
 		}
 		if (type.equals("classique")) {
 			IArc arc = new Arc_classique(place , nb_jetons);
 			arcs.add(arc);
+			t.addArc(sens, arc);
 
 		}
-		if (type.equals("zéro")  | type.equals("zero")) {
+		if (type.equals("zÃ©ro")  | type.equals("zero")) {
 			IArc arc = new Arc_zero(place);
 			arcs.add(arc);
+			t.addArc(sens, arc);
 
 		}
 		else {
@@ -47,6 +55,7 @@ public class Petrinet implements IPetrinet{
 
 	public void triggerTransition(Transition transition) {
 		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -89,8 +98,6 @@ public class Petrinet implements IPetrinet{
 		}
 		transitions.remove(transition);
 	}
-
-
 
 
 

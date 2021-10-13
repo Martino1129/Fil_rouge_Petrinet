@@ -6,13 +6,15 @@ public interface IPetrinet {
 	
 	public void createTransitition(LinkedList arc_e, LinkedList arc_s);
 	
-	public void createArc(Place place, String type, int nb_jetons) throws TypeException ;
+	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction ;
 				
 	public void removeTransition(Transition transition);
 
-	void removeArc(IArc arc);
+	public void removeArc(IArc arc);
 
-	void removePlace(Place place);
+	public void removePlace(Place place);
+
+  public void triggerTransition(Transition transition);
 	
 	
 }

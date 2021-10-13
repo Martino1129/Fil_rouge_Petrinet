@@ -17,6 +17,11 @@ public class Arc_zero implements IArc{
 		return; 
 	}
 	
+
+	public String getType() {
+		return "zero";
+	}
+
 	public Place getPlace() {
 		return place_a;
 	}
