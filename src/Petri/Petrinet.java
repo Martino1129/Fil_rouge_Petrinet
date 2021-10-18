@@ -7,9 +7,13 @@ public class Petrinet implements IPetrinet{
 	private LinkedList <IArc> arcs;
 	private LinkedList <Transition> transitions;
 	
-
-	public void createPlace(int n) {
-		Place p = new Place(n);
+	public Petrinet(LinkedList <Place> places, LinkedList <IArc> arcs, LinkedList <Transition> transitions) {
+		this.places = places;
+		this.arcs = arcs;
+		this.transitions = transitions;
+	}
+	
+	public void addPlace(Place p) {
 		places.add(p);
 		
 		
@@ -21,36 +25,33 @@ public class Petrinet implements IPetrinet{
 	 * sens True => transiton-->place, False => place --> transition
 	 * There are 3 differents types of arc, the type is defined by the string "type"
 	 */
-	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction {
+	public void addArc(IArc arc, String type, boolean sens, Transition t) throws TypeException,ImpossibleAction {
 		if (sens) {
-			for (IArc arc : t.getArc_s()) {
-				if (arc.getPlace().equals(place)) {
+			for (IArc existing_arc : t.getArc_s()) {
+				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 				}
 			}
 		}
-		else for (IArc arc : t.getArc_e()) {
-				if (arc.getPlace().equals(place)) {
+		else for (IArc existing_arc : t.getArc_e()) {
+				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 			}
 		}
 		
 		// create a new Arc and add associate it to a Transition
-		if (type.equals("videur")) {
+		if (arc.getType().equals("videur")) {
 
-			IArc arc = new Arc_videur(place);
 			arcs.add(arc);
 			t.addArc(sens, arc);
 
 		}
-		if (type.equals("classique")) {
-			IArc arc = new Arc_classique(place , nb_jetons);
+		if (arc.getType().equals("classique")) {
 			arcs.add(arc);
 			t.addArc(sens, arc);
 
 		}
-		if (type.equals("zéro")  | type.equals("zero")) {
-			IArc arc = new Arc_zero(place);
+		if (arc.getType().equals("zéro")  | type.equals("zero")) {
 			arcs.add(arc);
 			t.addArc(sens, arc);
 
@@ -64,8 +65,7 @@ public class Petrinet implements IPetrinet{
 	/**
 	 * This method creates a Transition not connected with any arcs
 	 */
-	public void createTransitition() {
-		Transition t = new Transition(new LinkedList<IArc>(), new LinkedList<IArc>());
+	public void addTransitition(Transition t) {
 		transitions.add(t);
 		
 	}

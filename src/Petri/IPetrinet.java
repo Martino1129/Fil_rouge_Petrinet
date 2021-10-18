@@ -3,9 +3,9 @@ import java.util.LinkedList;
 
 public interface IPetrinet {
 	
-	public void createPlace(int n);
+	public void addPlace(int n);
 	
-	public void createTransitition();
+	public void addTransitition();
 	
 	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction ;
 				
@@ -15,7 +15,8 @@ public interface IPetrinet {
 
 	public void removePlace(Place place);
 
-  public void triggerTransition(Transition transition);
+	public void triggerTransition(Transition transition);
+	
 	
 	
 }
