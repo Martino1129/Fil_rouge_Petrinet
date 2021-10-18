@@ -1,9 +1,12 @@
 package Petri;
+<<<<<<< HEAD:src/Petri/IPetrinet.java
 import java.util.LinkedList;
 
+=======
+>>>>>>> mdev:src/IPetrinet.java
 public interface IPetrinet {
 	
-	public void createPlace(int n);
+	public void createPlace(int n) throws ImpossibleAction;
 	
 	public void createTransitition();
 	
