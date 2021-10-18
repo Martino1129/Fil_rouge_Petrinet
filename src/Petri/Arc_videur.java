@@ -1,3 +1,4 @@
+package Petri;
 
 public class Arc_videur implements IArc{
 	private Place place_a;

@@ -1,10 +1,11 @@
+package Petri;
 import java.util.LinkedList;
 
 public class Transition {
         private LinkedList<IArc> arc_e;
         private LinkedList<IArc> arc_s;
         
-        public Transition(LinkedList arc_e, LinkedList arc_s) {
+        public Transition(LinkedList<IArc> arc_e, LinkedList<IArc> arc_s) {
                 super();
                 this.arc_e = arc_e;
                 this.arc_s = arc_s;
