@@ -1,4 +1,8 @@
 package Petri;
+
+import Exception.ImpossibleAction;
+import Exception.TypeException;
+
 public interface IPetrinet {
 	
 	public void createPlace(int n) throws ImpossibleAction;

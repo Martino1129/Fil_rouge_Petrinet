@@ -3,16 +3,17 @@ package Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+
+import Exception.ImpossibleAction;
+
 import java.util.LinkedList;
 
 import Petri.Arc_classique;
 import Petri.IArc;
-import Petri.ImpossibleAction;
 import Petri.Place;
 import Petri.Transition;
 import Petri.Arc_zero;
 import Petri.Arc_videur;
-import Petri.ImpossibleAction;
 public class TransitionTest {
 
     public static Transition setup(int jetons1, int jetons2, int weight1, int weight2, String type) {

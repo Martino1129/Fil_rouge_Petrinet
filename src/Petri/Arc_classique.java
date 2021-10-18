@@ -10,6 +10,7 @@ public class Arc_classique implements IArc{
 		
 	}
 	public boolean arc_valide() {
+		// return true if the transition is possible for this place
 		if (this.nb_jetons <= this.place_a.get_nb_jetons()) {
 			return true; 
 			//test
@@ -18,8 +19,9 @@ public class Arc_classique implements IArc{
 	}
 	
 	public void apply_transition(boolean sens) {
-		// si sens == true, la place est après la transition 
-		if (sens == true) { 
+		//apply the modification due to the transition to the place
+		
+		if (sens == true) { // the arc points the transition
 			this.place_a.modify_nb_jetons(this.place_a.get_nb_jetons()+this.nb_jetons);
 		}
 		else { 
@@ -28,9 +30,11 @@ public class Arc_classique implements IArc{
 	}
 	
 	public String getType() {
+		// return the type of the arc
 		return "classique";
 	}
 	public Place getPlace() {
+		// return the place associated to the arc
 		return place_a;
 	}
 }

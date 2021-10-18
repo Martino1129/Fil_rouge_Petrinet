@@ -1,4 +1,4 @@
-package Petri;
+package Exception;
 
 public class ImpossibleAction extends Exception{
 	
