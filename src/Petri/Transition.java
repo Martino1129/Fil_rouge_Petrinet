@@ -11,7 +11,10 @@ public class Transition {
                 this.arc_s = arc_s;
         }
         
+
+        
         public boolean trigger_transition() {
+        	// check if the transition is possible and trigger it after 
         		for (IArc arc : arc_e) {
                         if (!arc.arc_valide()) {
                                 return false;
@@ -28,7 +31,7 @@ public class Transition {
         }
 
         public void addArc(boolean sens, IArc a) throws ImpossibleAction{
-        	// add an arc to the transition if sens is true, the arc is at the beginning of the transition 
+        	// add an arc to the transition if sens is true, the arc points the transition 
         	if (sens) {
         		this.arc_e.add(a);
         	} else {
