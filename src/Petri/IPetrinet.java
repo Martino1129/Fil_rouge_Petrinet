@@ -5,7 +5,7 @@ public interface IPetrinet {
 	
 	public void addPlace(Place p);
 	
-	public void addTransitition(Transition transition);
+	public void addTransition(Transition transition);
 	
 	public void addArc(IArc arc, String type, boolean sens, Transition t) throws TypeException,ImpossibleAction;
 				

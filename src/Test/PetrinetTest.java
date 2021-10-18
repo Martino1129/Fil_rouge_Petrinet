@@ -1,79 +1,112 @@
 package Test;
 
-import org.junit.Test;
+import java.util.LinkedList;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 
+import Petri.Arc_classique;
+import Petri.Arc_videur;
+import Petri.Arc_zero;
+import Petri.IArc;
+import Petri.ImpossibleAction;
 import Petri.Petrinet;
 import Petri.Place;
+import Petri.Transition;
+import Petri.TypeException;
 
 public class PetrinetTest {
+	static Petrinet petrinet = null;
+	static Place P1 = null;
+	static Place P2 = null;
+	static IArc T1P1 = null;
+	static IArc T2P1 = null;
+	static IArc P1T3 = null;
+	static IArc T3P2 = null;
+	static IArc P2T1 = null;
+	static IArc P2T3 = null;
+	static IArc P2T2 = null;
+	static Transition T1 = null;
+	static Transition T2 = null;
+	static Transition T3 = null;
+
+	
 	@BeforeAll
-	static void setup() {
-		System.out.println("BeforeAll");
-		Petrinet petrinet = new Petrinet(null, null, null);
+	static void setup() throws TypeException, ImpossibleAction {
 		
-	}
+		System.out.println("BeforeAll !!");
+		/**
+		 * Firstly we create a pretri diagram, then 2 places , 3 Transitions and 7 arcs
+		 */
+		petrinet = new Petrinet(new LinkedList <Place>(), new LinkedList <IArc>(),new  LinkedList <Transition>());
+		
+		P1 = new Place(2);
+		P2 = new Place(5);
+		
+		petrinet.addPlace(P1);
+		petrinet.addPlace(P2);
 
-	@BeforeEach
-	void setupThis() {
-		System.out.println("BeforeEach");
+		
+		T1P1 = new Arc_classique(P1,2);
+		T2P1 = new Arc_classique(P1,2);
+		P1T3 = new Arc_classique(P1,1);
+		T3P2 = new Arc_classique(P2, 4);
+		P2T1 = new Arc_classique(P2,4);
+		P2T3 = new Arc_videur(P2);
+		P2T2 = new Arc_zero(P2);
+
+		T1 = new Transition(new LinkedList<IArc>(),new LinkedList<IArc>());
+		T2 = new Transition(new LinkedList<IArc>(),new LinkedList<IArc>());
+		T3 = new Transition(new LinkedList<IArc>(),new LinkedList<IArc>());
+
+
+		petrinet.addArc(T1P1, "classique", false, T1);
+		petrinet.addArc(T2P1, "classique", false, T2);
+		petrinet.addArc(P1T3, "classique", true, T3);
+		petrinet.addArc(T3P2, "classique", false, T3);
+		petrinet.addArc(P2T1, "classique", true, T1);
+		petrinet.addArc(P2T3, "videur", true, T3);
+		petrinet.addArc(P2T2, "zero", true, T2);
+	
+		petrinet.addTransition(T1);
+		petrinet.addTransition(T2);
+		petrinet.addTransition(T3);
+		System.out.println();
+
 	}
 
 
 	@Test
-	@Order(1)
+	public void testPlaces() throws TypeException, ImpossibleAction {
 
-	public void testgetName() {
-		Place p = new Place("michou",2);
+		Assertions.assertEquals(petrinet.getPlaces().size(),2);
 		
-		Assertions.assertEquals("michou", p.getName());
-		Assertions.assertEquals(2, p.getTokens());	
+		Assertions.assertEquals(petrinet.getPlaces().get(0), P1);
+		Assertions.assertEquals(petrinet.getPlaces().get(1), P2);
 		
-
+		System.out.println("Places bien instaures dans petrinet");
 	}
 	
 	@Test
-	@Order(2)
-	public void testgetTokens() {
-		Place p = new Place("michou",2);
-		Assertions.assertEquals(2, p.getTokens());	
-		
+	public void testTransition() throws TypeException, ImpossibleAction {
 
+		Assertions.assertEquals(petrinet.getTransitions().size(),3);
+		
+		Assertions.assertEquals(petrinet.getTransitions().get(0), T1);
+		Assertions.assertEquals(petrinet.getTransitions().get(1), T2);
+		System.out.println("Transitions bien instaures dans petrinet");
 	}
 	
 	@Test
-	@Order(4)
-	public void testremoveTokens() {
-		Place p = new Place("michou",10);
-		p.removeTokens(5);
-		Assertions.assertEquals(5, p.getTokens());			
-		p.removeTokens(23);
-		Assertions.assertEquals(0, p.getTokens());			
+	public void testArc() throws TypeException, ImpossibleAction {
 
+		Assertions.assertEquals(petrinet.getArcs().size(),7);
+		Assertions.assertEquals(petrinet.getTransitions().get(2), T2P1);
+		Assertions.assertEquals(petrinet.getTransitions().get(6), P2T3);
+		Assertions.assertEquals(expected, actual);
+		System.out.println("Transitions bien instaures dans petrinet");
 	}
-	
-	@Test
-	@Order(3)
-	public void constructor() {
-		Place p0 = new Place();
-		Assertions.assertEquals(0, p0.getTokens());	
-		Assertions.assertEquals("P_1", p0.getName());	
-		
-		Place p1 = new Place(null, 0);
-		Assertions.assertEquals("PLACE", p1.getName());
-		
-		Place p = new Place("michou",-5);
-		Assertions.assertEquals(-5, p.getTokens());		
-		p.removeTokens(3);
-		Assertions.assertEquals(0, p.getTokens());	
-
-		
-		Place p2 = new Place("michou",0);
-		p2.addTokens(5);
-		Assertions.assertEquals(5, p2.getTokens());	
-	}
-
 }
