@@ -1,3 +1,4 @@
+package Petri;
 
 public class ImpossibleAction extends Exception{
 	public ImpossibleAction(String message) {

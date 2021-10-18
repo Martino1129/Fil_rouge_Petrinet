@@ -1,3 +1,4 @@
+package Petri;
 
 public class Arc_classique implements IArc{
 	private int nb_jetons;

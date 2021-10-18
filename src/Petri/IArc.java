@@ -1,3 +1,4 @@
+package Petri;
 
 public interface IArc {
 	

@@ -1,3 +1,4 @@
+package Petri;
 
 public class Place {
 	private int nombre_jetons;

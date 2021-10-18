@@ -1,6 +1,7 @@
+package Petri;
 public interface IPetrinet {
 	
-	public void createPlace(int n);
+	public void createPlace(int n) throws ImpossibleAction;
 	
 	public void createTransitition();
 	
