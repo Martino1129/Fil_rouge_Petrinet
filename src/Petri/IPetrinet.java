@@ -1,3 +1,4 @@
+package Petri;
 import java.util.LinkedList;
 
 public interface IPetrinet {
