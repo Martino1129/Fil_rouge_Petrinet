@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public interface IPetrinet {
 	
 	public void createPlace(int n);

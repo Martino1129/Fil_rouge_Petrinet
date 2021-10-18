@@ -13,4 +13,13 @@ public class Place {
 	public void modify_nb_jetons(int n) {
 		nombre_jetons = n;
 	}
+	
+	public static void main(String[] args) {
+		
+		Place p = new Place(4);
+		System.out.println(p.get_nb_jetons());
+		p.modify_nb_jetons(5);
+		System.out.println(p.get_nb_jetons());
+		
+	}
 }
