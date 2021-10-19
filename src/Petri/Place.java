@@ -1,9 +1,14 @@
 package Petri;
 
+import Exception.ImpossibleAction;
+
 public class Place {
 	private int nombre_jetons;
 	
-	public Place(int n) {
+	public Place(int n) throws ImpossibleAction {
+		if (n<0) {
+			throw new ImpossibleAction("nb_jetons can't be negative");
+		}
 		this.nombre_jetons = n;
 	}
 	
@@ -13,14 +18,5 @@ public class Place {
 	
 	public void modify_nb_jetons(int n) {
 		nombre_jetons = n;
-	}
-	
-	public static void main(String[] args) {
-		
-		Place p = new Place(4);
-		System.out.println(p.get_nb_jetons());
-		p.modify_nb_jetons(5);
-		System.out.println(p.get_nb_jetons());
-		
 	}
 }

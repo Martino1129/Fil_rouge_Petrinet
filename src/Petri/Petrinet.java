@@ -1,6 +1,9 @@
 package Petri;
 import java.util.LinkedList;
 
+import Exception.ImpossibleAction;
+import Exception.TypeException;
+
 public class Petrinet implements IPetrinet{
 	
 	private LinkedList <Place> places;
@@ -9,9 +12,6 @@ public class Petrinet implements IPetrinet{
 	
 
 	public void createPlace(int n) throws ImpossibleAction{
-		if (n<0) {
-			throw new ImpossibleAction("nb_jetons can't be negative");
-		}
 		Place p = new Place(n);
 		places.add(p);
 		
