@@ -10,52 +10,51 @@ public class Petrinet implements IPetrinet{
 	private LinkedList <IArc> arcs;
 	private LinkedList <Transition> transitions;
 	
-
-	public void createPlace(int n) throws ImpossibleAction{
-		Place p = new Place(n);
+	public Petrinet(LinkedList <Place> places, LinkedList <IArc> arcs, LinkedList <Transition> transitions) {
+		this.places = places;
+		this.arcs = arcs;
+		this.transitions = transitions;
+	}
+	
+	public void addPlace(Place p) {
 		places.add(p);
-		
-		
 	}
 	
 	
 	/**
 	 * This method creates an Arc: 
-	 * sens True => transiton-->place, False => place --> transition
+	 * sens False => transiton-->place, True => place --> transition
 	 * There are 3 differents types of arc, the type is defined by the string "type"
 	 */
-	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction {
+	public void addArc(IArc arc, String type, boolean sens, Transition transition) throws TypeException,ImpossibleAction {
 		if (sens) {
-			for (IArc arc : t.getArc_s()) {
-				if (arc.getPlace().equals(place)) {
+			for (IArc existing_arc : transition.getArc_e()) {
+				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 				}
 			}
 		}
-		else for (IArc arc : t.getArc_e()) {
-				if (arc.getPlace().equals(place)) {
+		else for (IArc existing_arc : transition.getArc_s()) {
+				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 			}
 		}
 		
 		// create a new Arc and add associate it to a Transition
-		if (type.equals("videur")) {
+		if (arc.getType().equals("videur")) {
 
-			IArc arc = new Arc_videur(place);
 			arcs.add(arc);
-			t.addArc(sens, arc);
-
-		}
-		if (type.equals("classique")) {
-			IArc arc = new Arc_classique(place , nb_jetons);
-			arcs.add(arc);
-			t.addArc(sens, arc);
+			transition.addArc(sens, arc);
 
 		}
-		if (type.equals("zéro")  | type.equals("zero")) {
-			IArc arc = new Arc_zero(place);
+		else if (arc.getType().equals("classique")) {
 			arcs.add(arc);
-			t.addArc(sens, arc);
+			transition.addArc(sens, arc);
+
+		}
+		else if (arc.getType().equals("zéro")  | arc.getType().equals("zero")) {
+			arcs.add(arc);
+			transition.addArc(sens, arc);
 
 		}
 		else {
@@ -67,8 +66,7 @@ public class Petrinet implements IPetrinet{
 	/**
 	 * This method creates a Transition not connected with any arcs
 	 */
-	public void createTransitition() {
-		Transition t = new Transition(new LinkedList<IArc>(), new LinkedList<IArc>());
+	public void addTransition(Transition t) {
 		transitions.add(t);
 		
 	}
@@ -89,7 +87,9 @@ public class Petrinet implements IPetrinet{
 		
 		for (IArc arc : arcs) {
 			if (arc.getPlace().equals(place)) {
-				arcs.remove(arc);
+				removeArc(arc);
+				System.out.println("removing arcccc");
+
 			}
 		}
 		places.remove(place);
@@ -99,8 +99,24 @@ public class Petrinet implements IPetrinet{
 	@Override
 	public void removeArc(IArc arc) {
 		arcs.remove(arc);
-		
-	}
+		System.out.println("caca");
+
+		System.out.println(transitions.size());
+
+		for (Transition transition : transitions) {
+			if (transition.getArc_e().contains(arc)) {
+				transition.getArc_e().remove(arc);
+				System.out.println("arc e removed");
+
+			}
+			if (transition.getArc_s().contains(arc)) {
+				transition.getArc_s().remove(arc);
+				System.out.println("arc s removed");
+
+			}
+		}
+
+ 	}
 
 	@Override
 	public void removeTransition(Transition transition) {
@@ -120,9 +136,18 @@ public class Petrinet implements IPetrinet{
 		transitions.remove(transition);
 	}
 
+	public LinkedList<Place> getPlaces() {
+		return places;
+	}
 
+	public LinkedList<IArc> getArcs() {
+		return arcs;
+	}
 
-	
+	public LinkedList<Transition> getTransitions() {
+		return transitions;
+	}
+
 	
 
 }

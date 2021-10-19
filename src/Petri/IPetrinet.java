@@ -1,23 +1,23 @@
 package Petri;
-<<<<<<< HEAD
-<<<<<<< HEAD:src/Petri/IPetrinet.java
+
 import java.util.LinkedList;
 
-=======
->>>>>>> mdev:src/IPetrinet.java
-=======
+
 
 import Exception.ImpossibleAction;
 import Exception.TypeException;
 
->>>>>>> mdev
 public interface IPetrinet {
 	
+
+	public void addPlace(Place p);
+
 	public void createPlace(int n) throws ImpossibleAction;
+
 	
-	public void createTransitition();
+	public void addTransition(Transition transition);
 	
-	public void createArc(Place place, String type, int nb_jetons, boolean sens, Transition t) throws TypeException,ImpossibleAction ;
+	public void addArc(IArc arc, String type, boolean sens, Transition t) throws TypeException,ImpossibleAction;
 				
 	public void removeTransition(Transition transition);
 
@@ -25,7 +25,8 @@ public interface IPetrinet {
 
 	public void removePlace(Place place);
 
-  public void triggerTransition(Transition transition);
+	public void triggerTransition(Transition transition);
+	
 	
 	
 }
