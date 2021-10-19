@@ -1,9 +1,6 @@
 package Petri;
 
 import java.util.LinkedList;
-
-
-
 import Exception.ImpossibleAction;
 import Exception.TypeException;
 

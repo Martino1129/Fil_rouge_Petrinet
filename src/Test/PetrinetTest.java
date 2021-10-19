@@ -8,17 +8,19 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import Exception.ImpossibleAction;
+import Exception.TypeException;
+
 import org.junit.jupiter.api.Order;
 
 import Petri.Arc_classique;
 import Petri.Arc_videur;
 import Petri.Arc_zero;
 import Petri.IArc;
-import Petri.ImpossibleAction;
 import Petri.Petrinet;
 import Petri.Place;
 import Petri.Transition;
-import Petri.TypeException;
 
 @TestMethodOrder(OrderAnnotation.class)
 
