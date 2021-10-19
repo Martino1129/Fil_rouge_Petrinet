@@ -1,6 +1,9 @@
 package Petri;
 import java.util.LinkedList;
 
+import Exception.ImpossibleAction;
+import Exception.TypeException;
+
 public interface IPetrinet {
 	
 	public void addPlace(Place p);

@@ -1,6 +1,8 @@
 package Petri;
 import java.util.LinkedList;
 
+import Exception.ImpossibleAction;
+
 public class Transition {
         private LinkedList<IArc> arc_e;
         private LinkedList<IArc> arc_s;
