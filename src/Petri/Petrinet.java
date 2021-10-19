@@ -18,8 +18,6 @@ public class Petrinet implements IPetrinet{
 	
 	public void addPlace(Place p) {
 		places.add(p);
-		
-		
 	}
 	
 	
