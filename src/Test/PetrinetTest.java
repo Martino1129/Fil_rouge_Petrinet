@@ -150,7 +150,7 @@ public class PetrinetTest {
 		petrinet.triggerTransition(T1);
 		petrinet.triggerTransition(T1);
 
-		System.out.println("T1 Triggered, checking if petrinet is not damaged");
+		System.out.println("T1 Triggered x5, checking if petrinet is not damaged");
 		testPlaces();
 		testTransitions();
 		testArcs();
@@ -178,10 +178,49 @@ public class PetrinetTest {
 	@Order(7)
 	@Test
 	public void testremoveArc() throws TypeException, ImpossibleAction {
+
 		petrinet.removeArc(P2T3);
-/*		Assertions.assertTrue(T3.getArc_e().contains(P2T3)); */
+
+		Assertions.assertTrue(T3.getArc_e().contains(P2T3)==false);
 		Assertions.assertEquals(petrinet.getArcs().size(), 6);
-		System.out.println("");
+		Assertions.assertEquals(T3.getArc_e().size(), 1);
+		System.out.println("Arc P2T3 nicely removed");
+
+	}
+	
+	@Order(8)
+	@Test
+	public void testremoveTransition() {
+
+		petrinet.removeTransition(T1);
+
+		Assertions.assertTrue(petrinet.getTransitions().contains(T1)==false);
+		Assertions.assertEquals(petrinet.getArcs().size(), 4);
+		System.out.println("Transition T1 and his linked arcs nicely removed");
+
+	}
+	
+	@Order(9)
+	@Test
+	public void testremovePlace() {
+
+		petrinet.removePlace(P2);
+
+		Assertions.assertTrue(petrinet.getPlaces().contains(P2)==false);
+		Assertions.assertEquals(petrinet.getPlaces().size(), 1);
+		Assertions.assertEquals(petrinet.getArcs().size(), 3);
+
+		Assertions.assertEquals(T1.getArc_e().size(), 0);
+		Assertions.assertEquals(T1.getArc_s().size(), 0);
+
+		Assertions.assertTrue(P2T2.getPlace().equals(P2));
+		Assertions.assertEquals(T2.getArc_e().size(), 1);
+		Assertions.assertEquals(T2.getArc_s().size(), 1);
+
+		Assertions.assertEquals(T3.getArc_e().size(), 1);
+		Assertions.assertEquals(T3.getArc_e().size(), 1);
+
+		System.out.println("Place P1 and his linked arcs nicely removed");
 
 	}
 }

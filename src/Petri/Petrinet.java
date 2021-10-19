@@ -25,15 +25,15 @@ public class Petrinet implements IPetrinet{
 	 * sens False => transiton-->place, True => place --> transition
 	 * There are 3 differents types of arc, the type is defined by the string "type"
 	 */
-	public void addArc(IArc arc, String type, boolean sens, Transition t) throws TypeException,ImpossibleAction {
+	public void addArc(IArc arc, String type, boolean sens, Transition transition) throws TypeException,ImpossibleAction {
 		if (sens) {
-			for (IArc existing_arc : t.getArc_e()) {
+			for (IArc existing_arc : transition.getArc_e()) {
 				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 				}
 			}
 		}
-		else for (IArc existing_arc : t.getArc_s()) {
+		else for (IArc existing_arc : transition.getArc_s()) {
 				if (existing_arc.getPlace().equals(arc.getPlace())) {
 					throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
 			}
@@ -43,17 +43,17 @@ public class Petrinet implements IPetrinet{
 		if (arc.getType().equals("videur")) {
 
 			arcs.add(arc);
-			t.addArc(sens, arc);
+			transition.addArc(sens, arc);
 
 		}
 		else if (arc.getType().equals("classique")) {
 			arcs.add(arc);
-			t.addArc(sens, arc);
+			transition.addArc(sens, arc);
 
 		}
 		else if (arc.getType().equals("zéro")  | arc.getType().equals("zero")) {
 			arcs.add(arc);
-			t.addArc(sens, arc);
+			transition.addArc(sens, arc);
 
 		}
 		else {
@@ -86,7 +86,9 @@ public class Petrinet implements IPetrinet{
 		
 		for (IArc arc : arcs) {
 			if (arc.getPlace().equals(place)) {
-				arcs.remove(arc);
+				removeArc(arc);
+				System.out.println("removing arcccc");
+
 			}
 		}
 		places.remove(place);
@@ -96,8 +98,24 @@ public class Petrinet implements IPetrinet{
 	@Override
 	public void removeArc(IArc arc) {
 		arcs.remove(arc);
-		
-	}
+		System.out.println("caca");
+
+		System.out.println(transitions.size());
+
+		for (Transition transition : transitions) {
+			if (transition.getArc_e().contains(arc)) {
+				transition.getArc_e().remove(arc);
+				System.out.println("arc e removed");
+
+			}
+			if (transition.getArc_s().contains(arc)) {
+				transition.getArc_s().remove(arc);
+				System.out.println("arc s removed");
+
+			}
+		}
+
+ 	}
 
 	@Override
 	public void removeTransition(Transition transition) {
