@@ -38,7 +38,7 @@ public class Transition {
         		this.arc_e.add(a);
         	} else {
         		if (a.getType().equals("videur")||a.getType().equals("zero")) {
-        			throw new ImpossibleAction("ce type d'arc ne peut pas �tre en sortie d'une transition");
+        			throw new ImpossibleAction("this kind of arc can't be at the end of a transition");
         		}
         		this.arc_s.add(a);
         	}

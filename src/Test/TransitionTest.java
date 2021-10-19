@@ -16,7 +16,7 @@ import Petri.Arc_zero;
 import Petri.Arc_videur;
 public class TransitionTest {
 
-    public static Transition setup(int jetons1, int jetons2, int weight1, int weight2, String type) {
+    public static Transition setup(int jetons1, int jetons2, int weight1, int weight2, String type) throws ImpossibleAction {
     	
     	Place p1 = new Place(jetons1);
 		Place p2 = new Place(jetons2);
@@ -55,7 +55,7 @@ public class TransitionTest {
     }
     
     @Test
-    public void triggerTransitionTest() {
+    public void triggerTransitionTest() throws ImpossibleAction {
     	
     	//test with classic arc
     	
@@ -159,8 +159,9 @@ public class TransitionTest {
     	
     	Place p3 = new Place(1);
     	IArc a3 = new Arc_videur(p3);
-    	//Assertions.assertThrows(ImpossibleAction.class, ()->{t.addArc(false, a3)});
     	
+    	ImpossibleAction exception = Assertions.assertThrows(ImpossibleAction.class, ()->{t.addArc(false, a3);});
+    	Assertions.assertEquals("this kind of arc can't be at the end of a transition",exception.getMessage());
     	
     }	
     
