@@ -101,9 +101,6 @@ public class Petrinet implements IPetrinet{
     @Override
     public void removeArc(IArc arc) {
         arcs.remove(arc);
-        System.out.println("caca");
-
-        System.out.println(transitions.size());
 
         for (Transition transition : transitions) {
             if (transition.getArc_e().contains(arc)) {
