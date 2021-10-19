@@ -1,10 +1,15 @@
 package Petri;
 
+import Exception.ImpossibleAction;
+
 public class Arc_classique implements IArc{
 	private int nb_jetons;
 	private Place place_a;
 	
-	public Arc_classique(Place p, int n) {
+	public Arc_classique(Place p, int n) throws ImpossibleAction{
+		if(n<0) {
+			throw new ImpossibleAction("nb_jetons cannot be negative");
+		}
 		this.place_a = p;
 		this.nb_jetons = n;
 		
