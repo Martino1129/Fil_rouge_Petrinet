@@ -35,10 +35,20 @@ public class Transition {
         public void addArc(boolean sens, IArc a) throws ImpossibleAction{
         	// add an arc to the transition if sens is true, the arc points the transition 
         	if (sens) {
+        		for (IArc existing_arc : arc_e) {
+                    if (existing_arc.getPlace().equals(a.getPlace())) {
+                        throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
+                    }
+        		}
         		this.arc_e.add(a);
         	} else {
+        		for (IArc existing_arc : arc_s) {
+                    if (existing_arc.getPlace().equals(a.getPlace())) {
+                        throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
+                    }
+                }
         		if (a.getType().equals("videur")||a.getType().equals("zero")) {
-        			throw new ImpossibleAction("this kind of arc can't be at the end of a transition");
+        		throw new ImpossibleAction("this kind of arc can't be at the end of a transition");
         		}
         		this.arc_s.add(a);
         	}

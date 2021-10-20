@@ -29,19 +29,6 @@ public class Petrinet implements IPetrinet{
      * There are 3 differents types of arc, the type is defined by the string "type"
      */
     public void addArc(IArc arc, String type, boolean sens, Transition transition) throws TypeException,ImpossibleAction {
-        if (sens) {
-            for (IArc existing_arc : transition.getArc_e()) {
-                if (existing_arc.getPlace().equals(arc.getPlace())) {
-                    throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
-                }
-            }
-        }
-        else for (IArc existing_arc : transition.getArc_s()) {
-                if (existing_arc.getPlace().equals(arc.getPlace())) {
-                    throw new ImpossibleAction("An arc with the same direction, place and transition is already created");
-            }
-        }
-        
         // create a new Arc and add associate it to a Transition
         if (arc.getType().equals("videur")) {
 
@@ -90,7 +77,6 @@ public class Petrinet implements IPetrinet{
         for (IArc arc : arcs) {
             if (arc.getPlace().equals(place)) {
                 removeArc(arc);
-                System.out.println("removing arcccc");
 
             }
         }
@@ -105,12 +91,10 @@ public class Petrinet implements IPetrinet{
         for (Transition transition : transitions) {
             if (transition.getArc_e().contains(arc)) {
                 transition.getArc_e().remove(arc);
-                System.out.println("arc e removed");
 
             }
             if (transition.getArc_s().contains(arc)) {
                 transition.getArc_s().remove(arc);
-                System.out.println("arc s removed");
 
             }
         }

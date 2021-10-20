@@ -12,6 +12,7 @@ import Petri.Arc_classique;
 import Petri.IArc;
 import Petri.Place;
 import Petri.Transition;
+import junit.framework.Assert;
 import Petri.Arc_zero;
 import Petri.Arc_videur;
 public class TransitionTest {
@@ -163,6 +164,11 @@ public class TransitionTest {
     	ImpossibleAction exception = Assertions.assertThrows(ImpossibleAction.class, ()->{t.addArc(false, a3);});
     	Assertions.assertEquals("this kind of arc can't be at the end of a transition",exception.getMessage());
     	
+    	//we can't put an arc between an arc and a transition if an arc linking the same place and transition and have the same direction already exists
+    	
+    	IArc a4 = new Arc_classique(p2,3);
+    	ImpossibleAction exception1 = Assertions.assertThrows(ImpossibleAction.class, ()->{t.addArc(true,a4);});
+    	Assertions.assertEquals("an arc already exists",exception1.getMessage()); // this test is not working but I don't know why 
     }	
     
  
