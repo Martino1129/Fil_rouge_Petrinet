@@ -11,6 +11,6 @@ For the IDL evaluation, Titouan Sauterey has made the test on the Petrinet class
 
 ####### Precision about the model ##########
 
-* When a transition was triggered, we made the choice to remove the tokens from the place before the transitions first and then to add the tokens to the place after the transition
+* When a transition was triggered, we made the choice to remove the tokens from the place first and then to add the tokens to the place in a second time  (it makes a difference with the arcVideurs)
 
 * Two arcs can't be linked to the same place and transition if they have same the direction. 
